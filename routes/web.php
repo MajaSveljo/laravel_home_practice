@@ -11,26 +11,5 @@
 |
 */
 
-use App\Task;
-//if this is imported on the page we don't have to write
-//App\Task before every Task, just Task
-
-Route::get('/', function () {
-    return view('welcome', [
-        'name' => 'Maja'
-    ]);
-});
-
-Route::get('/tasks', function (){
-    $tasks = Task::all();
-
-    
-    return view('tasks/index', compact('tasks'));
-});
-
-    Route::get('/tasks/{task}', function ($id){
-    $task = Task::find($id);
-
-    
-    return view('tasks.show', compact('task'));
-});
+Route::get('/tasks', 'TasksController@index');
+Route::get('/tasks/{task}', 'TasksController@show');
