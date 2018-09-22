@@ -15,20 +15,20 @@ Route::get('/', function () {
     return view('welcome', [
         'name' => 'Maja'
     ]);
-    //other syntax
-    // return view('welcome')->with('name', 'Maja');
-    //array way
-    // $array = ['first', 'second', 'third'];
-    //     return view('welcome', compact('array'));
-    //array to string conversion - na view-u stranici
-    //mora ispis sa foreach
 });
 
 Route::get('/tasks', function (){
-    $tasks = [
-        'Go to the store',
-        'Eat',
-        'Practice Laravel'
-    ];
-    return view('tasks', compact('tasks'));
+    $tasks = DB::table('tasks')->get();
+    //DB code is called querry builder
+    //we can specify a table and give a number of conditions
+    
+    return view('tasks/index', compact('tasks'));
+});
+
+//{} is called a wildcard and can be anything not just an id
+    Route::get('/tasks/{task}', function ($id){
+    $task = DB::table('tasks')->find($id);
+
+    
+    return view('tasks.show', compact('task'));
 });
