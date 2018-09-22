@@ -12,9 +12,13 @@ class TasksController extends Controller
         $tasks = Task::all();
         return view('tasks/index', compact('tasks'));
     }
-    public function show($id)
+
+    //this is called route model binding. for it to work the variable ($task)
+    //must have the same name as the wild card passed in the route!
+    
+    public function show(Task $task) //does Task::find{wildcard}
     {
-        $task = Task::find($id);
+        // $task = Task::find($id);
         return view('tasks.show', compact('task'));
     }
 }
