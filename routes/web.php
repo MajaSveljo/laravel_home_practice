@@ -12,9 +12,23 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome', [
+        'name' => 'Maja'
+    ]);
+    //other syntax
+    // return view('welcome')->with('name', 'Maja');
+    //array way
+    // $array = ['first', 'second', 'third'];
+    //     return view('welcome', compact('array'));
+    //array to string conversion - na view-u stranici
+    //mora ispis sa foreach
 });
 
-Route::get('/about', function (){
-    return view('about');
+Route::get('/tasks', function (){
+    $tasks = [
+        'Go to the store',
+        'Eat',
+        'Practice Laravel'
+    ];
+    return view('tasks', compact('tasks'));
 });
