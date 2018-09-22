@@ -11,6 +11,10 @@
 |
 */
 
+use App\Task;
+//if this is imported on the page we don't have to write
+//App\Task before every Task, just Task
+
 Route::get('/', function () {
     return view('welcome', [
         'name' => 'Maja'
@@ -18,16 +22,14 @@ Route::get('/', function () {
 });
 
 Route::get('/tasks', function (){
-    $tasks = DB::table('tasks')->get();
-    //DB code is called querry builder
-    //we can specify a table and give a number of conditions
+    $tasks = Task::all();
+
     
     return view('tasks/index', compact('tasks'));
 });
 
-//{} is called a wildcard and can be anything not just an id
     Route::get('/tasks/{task}', function ($id){
-    $task = DB::table('tasks')->find($id);
+    $task = Task::find($id);
 
     
     return view('tasks.show', compact('task'));
